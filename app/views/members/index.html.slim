@@ -9,14 +9,15 @@ table
         th
           = status
   tbody
-    - @members.each.with_index do | member, index |
-      tr class=member.id
+    - @members.each do | member, index |
+      tr
         td
           = member.name
-        = form_for(member) do | f |
-          - @statuses.each do | status, num |
-            td
-              = f.radio_button :status, status, checked: member.status == status
+        - @statuses.each do | status, num |
+          td
+            = button_to " ", { action: :update, id: member.id, status: status }, method: :put
+            - if member.status == status
+              | o
 
 = link_to :lunch, member_path(@members.room.ids, status: :lunch), method: :put
 = link_to "食事終了", member_path(@members.lunch.ids, status: :room), method: :put
