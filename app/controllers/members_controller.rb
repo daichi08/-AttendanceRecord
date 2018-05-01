@@ -5,6 +5,9 @@ class MembersController < ApplicationController
   end
 
   def update
-    redirect_to members_path
+    ids = params[:id].scan(/\w+/)
+    status_array = Array.new(ids.size, { status: params[:status] })
+    Member.update(ids, status_array)
+    redirect_to :root
   end
 end

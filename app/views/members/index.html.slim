@@ -17,3 +17,7 @@ table
           th
             - if member.status == status
               | o
+
+= link_to :lunch, member_path(@members.home.ids, status: :lunch), method: :put
+= link_to "食事終了", member_path(@members.lunch.ids, status: :room), method: :put
+= link_to "全員帰宅", member_path(@members.ids, status: :home), method: :put
