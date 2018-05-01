@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
   root "members#index"
-  resources :members, only: %w[index update]
+  resources :members, only: %w[update]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

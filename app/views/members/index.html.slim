@@ -15,10 +15,8 @@ table
           = member.name
         - @statuses.each do | status, num |
           td
-            = button_to " ", { action: :update, id: member.id, status: status }, method: :put
-            - if member.status == status
-              | o
+            = button_to member.status == status ? "o" : " ", { action: :update, id: member.id, status: status }, method: :patch
 
-= link_to :lunch, member_path(@members.room.ids, status: :lunch), method: :put
-= link_to "食事終了", member_path(@members.lunch.ids, status: :room), method: :put
-= link_to "全員帰宅", member_path(@members.ids, status: :home), method: :put
+= link_to :lunch, member_path( @members.room.blank? ? "0" : @members.room.ids, status: :lunch), method: :patch
+= link_to "食事終了", member_path( @members.lunch.blank? ? "0" : @members.lunch.ids, status: :room), method: :patch
+= link_to "全員帰宅", member_path( @members.ids, status: :home), method: :patch
