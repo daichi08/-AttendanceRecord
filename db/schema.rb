@@ -18,10 +18,8 @@ ActiveRecord::Schema.define(version: 2018_04_30_230659) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "member_id_id"
     t.bigint "member_id"
     t.index ["member_id"], name: "index_logs_on_member_id"
-    t.index ["member_id_id"], name: "index_logs_on_member_id_id"
   end
 
   create_table "members", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
