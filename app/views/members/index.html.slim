@@ -1,0 +1,19 @@
+h1
+  | members
+table
+  thead
+    tr
+      th
+       = :name
+      - @statuses.each do | status, num |
+        th
+          = status
+  tbody
+    - @members.each do | member |
+      tr
+        th
+          = member.name
+        - @statuses.each do | status, num |
+          th
+            - if member.status == status
+              | o
