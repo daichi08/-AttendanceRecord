@@ -19,9 +19,16 @@
 $(document).on('turbolinks:load', function() {
   $(function(){
     $('input[name="member[status]"]').on('change', function() {
-      var row = $(this).closest('tr').index();
-      var changed_user = document.getElementById(row);
-      alert(changed_user);
+      var changed_user_id = $(this).closest('tr').attr('class');
+      var status = $(this).val();
+      $.ajax({
+        url: "#{member_path}",
+        data: {id: changed_user_id, status: status}
+      }).done(function(html){
+        alert("完了しました");
+      }).fail(function(html){
+        alert("再読込してください");
+      });
     });
   });
 });
