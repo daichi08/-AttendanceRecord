@@ -5,6 +5,6 @@ class MembersController < ApplicationController
   end
 
   def update
-    
+    redirect_to members_path
   end
 end
