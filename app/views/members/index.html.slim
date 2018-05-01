@@ -9,8 +9,8 @@ table
         th
           = status
   tbody
-    - @members.each do | member |
-      tr
+    - @members.each.with_index do | member, index |
+      tr class=member.id
         td
           = member.name
         = form_for(member) do | f |
