@@ -11,13 +11,13 @@ table
   tbody
     - @members.each do | member |
       tr
-        th
+        td
           = member.name
-        - @statuses.each do | status, num |
-          th
-            - if member.status == status
-              | o
+        = form_for(member) do | f |
+          - @statuses.each do | status, num |
+            td
+              = f.radio_button :status, status, checked: member.status == status
 
-= link_to :lunch, member_path(@members.home.ids, status: :lunch), method: :put
+= link_to :lunch, member_path(@members.room.ids, status: :lunch), method: :put
 = link_to "食事終了", member_path(@members.lunch.ids, status: :room), method: :put
 = link_to "全員帰宅", member_path(@members.ids, status: :home), method: :put
