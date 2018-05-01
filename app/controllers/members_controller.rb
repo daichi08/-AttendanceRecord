@@ -3,4 +3,8 @@ class MembersController < ApplicationController
     @members = Member.order(:grade)
     @statuses = Member.statuses
   end
+
+  def update
+    
+  end
 end
