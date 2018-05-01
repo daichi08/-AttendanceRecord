@@ -15,20 +15,3 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
-
-$(document).on('turbolinks:load', function() {
-  $(function(){
-    $('input[name="member[status]"]').on('change', function() {
-      var changed_user_id = $(this).closest('tr').attr('class');
-      var status = $(this).val();
-      $.ajax({
-        url: "#{member_path}",
-        data: {id: changed_user_id, status: status}
-      }).done(function(html){
-        alert("完了しました");
-      }).fail(function(html){
-        alert("再読込してください");
-      });
-    });
-  });
-});
