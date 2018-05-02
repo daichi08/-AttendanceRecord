@@ -13,4 +13,19 @@ class Member < ApplicationRecord
   has_many :logs
 
   scope(:active_ids, -> { where(status: 0..6).ids })
+
+  def build_log
+    logs.build(
+      status: status,
+      started_at: changed_at,
+      changed_at: DateTime.current
+    )
+  end
+
+  def update_status(status)
+    update!(
+      status: status,
+      changed_at: DateTime.current
+    )
+  end
 end

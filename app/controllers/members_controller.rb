@@ -1,37 +1,29 @@
 class MembersController < ApplicationController
   def index
-    @members = Member.order(:grade)
+    @members = Member.order(:grade).order(:id)
     @statuses = Member.statuses
   end
 
   def update
     unless params[:id].to_i.zero?
       if params[:id].length == 1
-        changed_member = Member.find(params[:id])
-        changed_member.logs.build(
-          status: changed_member.status,
-          started_at: changed_member.changed_at,
-          changed_at: DateTime.current
-        )
-        changed_member.update(
-          status: params[:status],
-          changed_at: DateTime.current
-        )
+        build_log_and_update(Member.find(params[:id]))
       else
         ids = params[:id].scan(/\w+/)
-        Member.where(id: ids).each do | member |
-          member.logs.build(
-            status: member.status,
-            started_at: member.changed_at,
-            changed_at: DateTime.current
-          )
-          member.update(
-            status: params[:status],
-            changed_at: DateTime.current
-          )
+        ApplicationRecord.transaction do
+          Member.where(id: ids).each do |member|
+            build_log_and_update(member)
+          end
         end
       end
     end
     redirect_to :root
+  end
+
+  private
+
+  def build_log_and_update(member)
+    member.build_log
+    member.update_status(params[:status])
   end
 end
