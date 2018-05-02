@@ -6,36 +6,28 @@ h1
       table.table.table-bordered
         thead
           tr
-            th.col-md-2 名前
-            th.col-md-1 在室
-            th.col-md-1 実験室
-            th.col-md-1 加工室
-            th.col-md-1 授業
-            th.col-md-1 食事
-            th.col-md-1 扇が丘
-            th.col-md-1 学外
-            th.col-md-1 帰宅
-            th.col-md-1 病欠
-            th.col-md-1 就活
-            th.col-md-1 帰省
+            th.col-xs-2 名前
+            th.col-xs-1 在室
+            th.col-xs-1 実験室
+            th.col-xs-1 加工室
+            th.col-xs-1 授業
+            th.col-xs-1 食事
+            th.col-xs-1 扇が丘
+            th.col-xs-1 学外
+            th.col-xs-1 帰宅
+            th.col-xs-1 病欠
+            th.col-xs-1 就活
+            th.col-xs-1 帰省
         tbody
-          - if count == 0
-            - @members.first((@members.size.to_f/2).ceil).each do | member |
-              tr
-                td
-                  = member.name
-                - @members.statuses.each do | status, num |
-                  td.status
-                    = link_to member.status == status ? "o" : " ", { action: :update, id: member.id, status: status }, method: :patch, class: "btn btn-default btn-status"
-          - else
-            - @members.last(@members.size/2).each do | member |
-              tr
-                td
-                  = member.name
-                - @members.statuses.each do | status, num |
-                  td.status
-                    = link_to member.status == status ? "o" : " ", { action: :update, id: member.id, status: status }, method: :patch, class: "btn btn-default btn-status"
+          - count == 0 ? members = @members.first((@members.size.to_f/2).ceil) : members = @members.last(@members.size/2)
 
+          - members.each do | member |
+            tr
+              td
+                = member.name
+              - @members.statuses.each do | status, num |
+                td.status
+                  = link_to member.status == status ? "o" : " ", { action: :update, id: member.id, status: status }, method: :patch, class: "btn btn-default btn-status"
 
 = link_to "食事", member_path( @members.room.blank? ? "0" : @members.room.ids, status: :lunch), method: :patch, class: "btn btn-warning btn-lg"
 = link_to "食事終了", member_path( @members.lunch.blank? ? "0" : @members.lunch.ids, status: :room), method: :patch, class: "btn btn-success btn-lg"
