@@ -5,7 +5,7 @@ table
     tr
       th
        = :name
-      - @statuses.each do | status, num |
+      - @members.statuses.each do | status, num |
         th
           = status
   tbody
@@ -13,7 +13,7 @@ table
       tr
         td
           = member.name
-        - @statuses.each do | status, num |
+        - @members.statuses.each do | status, num |
           td
             = button_to member.status == status ? "o" : " ", { action: :update, id: member.id, status: status }, method: :patch
 
