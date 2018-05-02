@@ -9,7 +9,7 @@ table
         th
           = status
   tbody
-    - @members.each do | member, index |
+    - @members.each do | member |
       tr
         td
           = member.name
@@ -19,4 +19,4 @@ table
 
 = link_to :lunch, member_path( @members.room.blank? ? "0" : @members.room.ids, status: :lunch), method: :patch
 = link_to "食事終了", member_path( @members.lunch.blank? ? "0" : @members.lunch.ids, status: :room), method: :patch
-= link_to "全員帰宅", member_path( @members.ids, status: :home), method: :patch
+= link_to "全員帰宅", member_path( @members.active_ids.blank? ? "0" : @members.active_ids, status: :house), method: :patch
