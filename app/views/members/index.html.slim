@@ -15,7 +15,7 @@ table
           = member.name
         - @members.statuses.each do | status, num |
           td
-            = button_to member.status == status ? "o" : " ", { action: :update, id: member.id, status: status }, method: :patch
+            = link_to member.status == status ? "o" : " ", { action: :update, id: member.id, status: status }, method: :patch, class: "btn btn-default"
 
 = link_to :lunch, member_path( @members.room.blank? ? "0" : @members.room.ids, status: :lunch), method: :patch
 = link_to "食事終了", member_path( @members.lunch.blank? ? "0" : @members.lunch.ids, status: :room), method: :patch
