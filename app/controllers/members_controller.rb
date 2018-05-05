@@ -1,7 +1,6 @@
 class MembersController < ApplicationController
   def index
     @members = Member.order(:grade).order(:id)
-    @statuses = Member.statuses
   end
 
   def update

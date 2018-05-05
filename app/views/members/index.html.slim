@@ -1,7 +1,7 @@
 h1
   | members
 .row
-  - 2.times do | count |
+  - @members.each_slice((@members.size.to_f/2).ceil) do | member |
     .col-md-6
       table.table.table-bordered
         thead
@@ -19,13 +19,11 @@ h1
             th.col-xs-1 就活
             th.col-xs-1 帰省
         tbody
-          - count == 0 ? members = @members.first((@members.size.to_f/2).ceil) : members = @members.last(@members.size/2)
-
-          - members.each do | member |
+          - member.each do | member |
             tr
               td
                 = member.name
-              - @members.statuses.each do | status, num |
+              - @members.statuses.each_key do | status |
                 td.status
                   = link_to member.status == status ? "o" : " ", { action: :update, id: member.id, status: status }, method: :patch, class: "btn btn-default btn-status"
 
