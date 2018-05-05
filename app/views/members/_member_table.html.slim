@@ -1,0 +1,25 @@
+.col-md-6
+  table.table.table-bordered
+    thead
+      tr
+        th.col-xs-2 名前
+        th.col-xs-1 在室
+        th.col-xs-1 実験室
+        th.col-xs-1 加工室
+        th.col-xs-1 授業
+        th.col-xs-1 食事
+        th.col-xs-1 扇が丘
+        th.col-xs-1 学外
+        th.col-xs-1 帰宅
+        th.col-xs-1 病欠
+        th.col-xs-1 就活
+        th.col-xs-1 帰省
+    tbody
+      - table_member.each do | member |
+        tr.member-list
+          td
+            = link_to member.name, member_logs_path(member, format: :csv)
+          - @members.statuses.each_key do | status |
+            td.status
+              = link_to member_path(member, status: status ), method: :patch, class: "btn btn-default btn-status" do
+                = fa_icon "user", class: "fa-3x" if member.current_status(status)
