@@ -19,6 +19,17 @@ class MembersController < ApplicationController
     redirect_to :root
   end
 
+  def logs
+    @logs = Member.find(params[:member_id]).logs
+    respond_to do | format |
+      format.html
+      format.csv do
+        filename = "logs"
+        headers["Content-Disposition"] = "attachment; filename=\"#{filename}.csv\""
+      end
+    end
+  end
+
   private
 
   def build_log_and_update(member)

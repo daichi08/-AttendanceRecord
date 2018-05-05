@@ -23,7 +23,7 @@ h1
           - table_member.each do | member |
             tr.member-list
               td
-                = member.name
+                = link_to member.name, member_logs_path(member, format: :csv)
               - @members.statuses.each_key do | status |
                 td.status
                   = link_to member_path(member, status: status ), method: :patch, class: "btn btn-default btn-status" do
