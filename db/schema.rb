@@ -29,8 +29,7 @@ ActiveRecord::Schema.define(version: 2018_05_02_013504) do
     t.datetime "changed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["grade"], name: "index_members_on_grade"
-    t.index ["status"], name: "index_members_on_status"
+    t.index ["grade", "status"], name: "index_members_on_grade_and_status"
   end
 
   add_foreign_key "logs", "members"
