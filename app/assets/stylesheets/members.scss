@@ -6,8 +6,13 @@
   table-layout: fixed;
 }
 
+tr.member-list{
+  height: 60px;
+}
+
 td.status{
   position: relative;
+  overflow: hidden;
   .btn-status{
     position: absolute;
     top: 0;

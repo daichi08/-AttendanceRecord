@@ -18,7 +18,6 @@ class Member < ApplicationRecord
     logs.build(
       status: status,
       started_at: changed_at,
-      changed_at: DateTime.current
     )
   end
 
@@ -27,5 +26,9 @@ class Member < ApplicationRecord
       status: status,
       changed_at: DateTime.current
     )
+  end
+
+  def current_status(box_status)
+    status == box_status
   end
 end
