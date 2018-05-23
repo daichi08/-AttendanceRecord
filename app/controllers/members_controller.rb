@@ -20,12 +20,12 @@ class MembersController < ApplicationController
   end
 
   def logs
-    @logs = Member.find(params[:member_id]).logs
+    @logs = Member.find(params[:member_id]).logs.active_logs
     respond_to do | format |
       format.html
       format.csv do
-        filename = "logs"
-        headers["Content-Disposition"] = "attachment; filename=\"#{filename}.csv\""
+        filename = @logs.first.member.name
+        headers["Content-Disposition"] = "attachment; filename=\"#{filename}_logs.csv\""
       end
     end
   end

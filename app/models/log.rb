@@ -8,4 +8,10 @@ class Log < ApplicationRecord
   attribute :changed_at, :datetime, default: Proc.new { DateTime.current }
 
   belongs_to :member
+
+  scope(:active_logs, -> { where(status: 0..6) })
+
+  def active_time
+    ((changed_at - started_at)/3600).round(2)
+  end
 end
