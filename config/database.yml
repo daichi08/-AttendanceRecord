@@ -48,6 +48,9 @@ test:
 #
 production:
   <<: *default
-  database: klab_production
-  username: klab
-  password: <%= ENV['KLAB_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  #database: klab_production
+  #username: klab
+  #password: <%= ENV['KLAB_DATABASE_PASSWORD'] %>
